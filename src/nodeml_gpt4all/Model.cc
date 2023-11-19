@@ -127,6 +127,7 @@ namespace nodeml_gpt4all
             config.model = model;
             config.prompt = prompt;
             config.tokenCallback = tokenCallback;
+            config.mutex = &mutex;
 
             auto worker = new PredictWorker(env, config);
 

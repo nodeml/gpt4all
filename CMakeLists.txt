@@ -39,7 +39,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/src)
 GenerateNodeLIB()
 
 set(COMPONENT_NAME_MAIN ${PROJECT_NAME})
-set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
+set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)
 message(STATUS "INSTALL PREFIX ${CMAKE_INSTALL_PREFIX}")
 
 install(TARGETS llmodel DESTINATION bin)
@@ -77,9 +77,7 @@ install(TARGETS bert-default DESTINATION bin)
 
 # Include N-API wrappers
 # IncludeNapi(${PROJECT_NAME})
-file(GLOB_RECURSE ADDON_DLLS
-    ${CMAKE_INSTALL_PREFIX}/bin/*.*
-    )
+file(GLOB_RECURSE ADDON_DLLS ${CMAKE_BINARY_DIR}/bin/*.*)
 add_custom_command(TARGET ${PROJECT_NAME}
                     POST_BUILD
                     COMMAND ${CMAKE_COMMAND} -E copy_if_different

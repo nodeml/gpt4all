@@ -1,4 +1,3 @@
-// From https://github.com/arition/torch-js/blob/c94aa01ee2a45921f2cb461c5b0b3e0323f3fc9d/src/PredictWorker.h
 #pragma once
 
 #include <napi.h>
@@ -32,6 +31,7 @@ namespace nodeml_gpt4all
         std::string prompt;
         llmodel_prompt_context context;
         std::string result;
+        std::mutex * mutex;
     };
 
     class PredictWorker : public Napi::AsyncWorker
@@ -67,6 +67,8 @@ namespace nodeml_gpt4all
 
     void PredictWorker::Execute()
     {
+        _config.mutex->lock();
+
         LLModelWrapper *wrapper = reinterpret_cast<LLModelWrapper *>(_config.model);
 
         auto ctx = &_config.context;
@@ -93,8 +95,6 @@ namespace nodeml_gpt4all
             [=](int32_t token_id, const std::string tok)
             {
                 return ResponseCallback(token_id,tok);
-                // result += tok;
-                // return token_id != -1;
             },
             [](bool isRecalculating)
             {
@@ -124,11 +124,13 @@ namespace nodeml_gpt4all
 
     void PredictWorker::OnOK()
     {
+        _config.mutex->unlock();
         promise.Resolve(Napi::String::New(Env(), result));
     }
 
     void PredictWorker::OnError(const Napi::Error &e)
     {
+        _config.mutex->unlock();
         promise.Reject(e.Value());
     }
 
