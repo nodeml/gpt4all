@@ -1,0 +1,58 @@
+{
+  "name": "@nodeml/gpt4all",
+  "version": "2.2.0",
+  "description": "A pybind11 binding for nodejs.",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "keywords": [
+    "torch",
+    "torchvision",
+    "tensor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "node ./test.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cmake:rebuild": "cmake-js rebuild",
+    "cmake:build": "cmake-js build",
+    "compile": "cmake-js compile",
+    "pretty": "npx prettier --write .",
+    "clean": "node ./scripts/clean.js",
+    "install": "prebuild-install -r napi || npm run cmake:rebuild",
+    "installd": "cmake-js compile --debug",
+    "prebuild": "prebuild --backend cmake-js --include-regex \"\\.[nsd][oyl][dl]?[ie]?b?$\" -r napi"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.17.12",
+    "@babel/eslint-parser": "^7.17.0",
+    "@babel/node": "^7.15.4",
+    "@types/node": "^17.0.34",
+    "@typescript-eslint/eslint-plugin": "^5.24.0",
+    "@typescript-eslint/parser": "^5.24.0",
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "prettier": "2.7.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "cmake-js": "^7.2.1",
+    "node-addon-api": "^7.0.0",
+    "prebuild": "^12.1.0",
+    "prebuild-install": "^7.1.1"
+  },
+  "binary": {
+    "napi_versions": [
+      7
+    ]
+  }
+}
