@@ -1,13 +1,13 @@
 {
   "name": "@nodeml/gpt4all",
   "version": "1.0.0",
-  "description": "A pybind11 binding for nodejs.",
+  "description": "minimal gpt4all bindings for nodejs.",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
   "keywords": [
-    "torch",
-    "torchvision",
-    "tensor"
+    "gpt",
+    "ai",
+    "chat"
   ],
   "repository": {
     "type": "git",
