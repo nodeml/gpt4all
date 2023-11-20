@@ -54,11 +54,9 @@ endif()
 install(TARGETS bert-avxonly DESTINATION bin)
 install(TARGETS bert-default DESTINATION bin)
 
-file(GLOB ADDON_DLLS ${CMAKE_BINARY_DIR}/bin/**/*.*)
-
+file(GLOB_RECURSE ${CMAKE_BINARY_DIR}/bin/**/*.dll)
+message(STATUS "DLL FILES ${ADDON_DLLS} ${CMAKE_BINARY_DIR}/bin")
 add_custom_command(TARGET ${PROJECT_NAME}
                     POST_BUILD
-                    COMMAND ${CMAKE_COMMAND} -E copy_if_different
-                    ${ADDON_DLLS}
-                    $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+                    COMMAND node ${CMAKE_SOURCE_DIR}/scripts/dlls.js)
 
