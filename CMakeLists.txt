@@ -39,8 +39,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/src)
 GenerateNodeLIB()
 
 set(COMPONENT_NAME_MAIN ${PROJECT_NAME})
-set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR}/install)
-message(STATUS "INSTALL PREFIX ${CMAKE_INSTALL_PREFIX}")
+set(CMAKE_INSTALL_PREFIX ${CMAKE_BINARY_DIR})
 
 install(TARGETS llmodel DESTINATION bin)
 install(TARGETS gptj-avxonly DESTINATION bin)
@@ -54,30 +53,9 @@ if(APPLE)
 endif()
 install(TARGETS bert-avxonly DESTINATION bin)
 install(TARGETS bert-default DESTINATION bin)
-# install(TARGETS llmodel DESTINATION . COMPONENT ${COMPONENT_NAME_MAIN})
-# install(TARGETS gptj-avxonly DESTINATION . COMPONENT ${COMPONENT_NAME_MAIN})
-# install(TARGETS gptj-default DESTINATION . COMPONENT ${COMPONENT_NAME_MAIN})
-# install(TARGETS llama-mainline-avxonly DESTINATION . COMPONENT ${COMPONENT_NAME_MAIN})
-# install(TARGETS llama-mainline-default DESTINATION . COMPONENT ${COMPONENT_NAME_MAIN})
-# install(TARGETS llamamodel-mainline-avxonly DESTINATION . COMPONENT ${COMPONENT_NAME_MAIN})
-# install(TARGETS llamamodel-mainline-default DESTINATION . COMPONENT ${COMPONENT_NAME_MAIN})
-# if(APPLE)
-#   install(TARGETS llamamodel-mainline-metal DESTINATION . COMPONENT ${COMPONENT_NAME_MAIN})
-# endif()
-# install(TARGETS bert-avxonly DESTINATION . COMPONENT ${COMPONENT_NAME_MAIN})
-# install(TARGETS bert-default DESTINATION . COMPONENT ${COMPONENT_NAME_MAIN})
 
-# Essential include files to build a node addon,
-# You should add this line in every CMake.js based project
-# target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_JS_INC})
+file(GLOB ADDON_DLLS ${CMAKE_BINARY_DIR}/bin/**/*.*)
 
-# target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR}/src)
-
-
-
-# Include N-API wrappers
-# IncludeNapi(${PROJECT_NAME})
-file(GLOB_RECURSE ADDON_DLLS ${CMAKE_BINARY_DIR}/bin/*.*)
 add_custom_command(TARGET ${PROJECT_NAME}
                     POST_BUILD
                     COMMAND ${CMAKE_COMMAND} -E copy_if_different

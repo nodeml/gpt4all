@@ -1,6 +1,6 @@
 {
   "name": "@nodeml/gpt4all",
-  "version": "2.2.0",
+  "version": "1.0.0",
   "description": "A pybind11 binding for nodejs.",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -11,7 +11,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/nodeml/gpt4all"
   },
   "scripts": {
     "start": "node ./test.js",
