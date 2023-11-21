@@ -11,7 +11,7 @@ namespace nodeml_gpt4all
     Napi::Object Model::Init(Napi::Env env, Napi::Object exports)
     {
         auto func = DefineClass(env, "Model",
-                                {Model::StaticMethod("load", &Model::Load),
+                                {Model::StaticMethod("create", &Model::Create),
                                  Model::InstanceMethod("destroy", &Model::Destroy),
                                  Model::InstanceMethod("predict", &Model::Predict)});
 
@@ -45,7 +45,7 @@ namespace nodeml_gpt4all
     {
         return Napi::ObjectWrap<Model>::Unwrap(value.ToObject());
     }
-    Napi::Value Model::Load(const Napi::CallbackInfo &info)
+    Napi::Value Model::Create(const Napi::CallbackInfo &info)
     {
         auto env = info.Env();
 

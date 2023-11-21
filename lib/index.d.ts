@@ -1,7 +1,7 @@
 
 export declare class Model {
 
-  static load: (modelPath: string,device: 'gpu' | 'cpu') => Promise<Model>;
+  static create: (modelPath: string,device: 'gpu' | 'cpu') => Promise<Model>;
 
   destroy: () => void;
 

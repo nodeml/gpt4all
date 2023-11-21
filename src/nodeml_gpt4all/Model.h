@@ -28,7 +28,7 @@ namespace nodeml_gpt4all {
 
         static Model *FromObject(Napi::Value value);
 
-        static Napi::Value Load(const Napi::CallbackInfo &info);
+        static Napi::Value Create(const Napi::CallbackInfo &info);
 
 
         Napi::Value Predict(const Napi::CallbackInfo &info);

@@ -94,7 +94,9 @@
         "ranges": "cpp",
         "span": "cpp",
         "any": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "coroutine": "cpp",
+        "resumable": "cpp"
     },
 }
 // "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: WebKit, ColumnLimit: 100 }",
