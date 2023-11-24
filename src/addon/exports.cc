@@ -1,6 +1,6 @@
 #include <napi.h>
 #include "llmodel_c.h"
-#include <nodeml_gpt4all/Model.h>
+#include <addon/Model.h>
 
 
 Napi::Value SetLibraryPath(const Napi::CallbackInfo &info){

@@ -1,5 +1,5 @@
 
-function(DownloadGpt4All VERSION DESTINATION)
+function(DownloadGpt4All VERSION DESTINATION RESULT)
   if(NOT EXISTS ${DESTINATION}/gpt4all)
     
     set(REPO_DESTINATION_DIR ${CMAKE_BINARY_DIR}/gpt4all)
@@ -20,11 +20,21 @@ function(DownloadGpt4All VERSION DESTINATION)
 
     file(REMOVE ${REPO_DESTINATION_DIR})
   endif()
+
+  set(${RESULT} ${DESTINATION}/gpt4all PARENT_SCOPE)
 endfunction()
 
-function(GenerateNodeLIB)
+# Get the version from the package.json
+function(GetVersion)
+  file(READ ${CMAKE_SOURCE_DIR}/package.json PACKAGE_JSON)
+  string(JSON PACKAGE_VERSION GET ${PACKAGE_JSON} version)
+  set(PACKAGE_VERSION ${PACKAGE_VERSION} PARENT_SCOPE)
+endfunction()
+
+# generate node.lib
+function(GenerateNodeLib)
   if(MSVC AND CMAKE_JS_NODELIB_DEF AND CMAKE_JS_NODELIB_TARGET)
     # Generate node.lib
     execute_process(COMMAND ${CMAKE_AR} /def:${CMAKE_JS_NODELIB_DEF} /out:${CMAKE_JS_NODELIB_TARGET} ${CMAKE_STATIC_LINKER_FLAGS})
   endif()
-endfunction(GenerateNodeLIB)
+endfunction()

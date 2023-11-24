@@ -1,7 +1,6 @@
 #include "Model.h"
-#include <nodeml_gpt4all/ModelPromptContext.h>
-#include <nodeml_gpt4all/FunctionWorker.h>
-#include <nodeml_gpt4all/PredictWorker.h>
+#include <addon/FunctionWorker.h>
+#include <addon/PredictWorker.h>
 
 namespace nodeml_gpt4all
 {
