@@ -8,7 +8,7 @@ async function main() {
     const modelPath = path.resolve('mistral-7b-openorca.Q4_0.gguf')
     
 
-    const model = await gpt4all.Model.load(modelPath)
+    const model = await gpt4all.create(modelPath)
 
     console.log("Loaded",modelPath)
 
@@ -19,6 +19,8 @@ async function main() {
     ASSISTANT: `,(tokenId,token,total) => {
         console.log("Args",total)
         return !total.includes('USER:');
+    },{
+        temperature: 1
     })
     console.timeEnd("predict")
     console.log("RESULT",predictResult,predictResult.length)
